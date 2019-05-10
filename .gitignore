@@ -10,6 +10,7 @@
 .*!travis.yml
 target
 eclipse-target
+.recommenders
 **/src/generated/
 **/tmp/
 
