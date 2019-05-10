@@ -1,0 +1,3 @@
+= composited keys poc
+
+This proof of concept is going to try to adapt the current devon4j and cobigen structure to a more generic one that will allow with few changes to adapt the type of id so it can also admit not only Long but also  EmbbededId objects.
