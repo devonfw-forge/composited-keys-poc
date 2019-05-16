@@ -3,6 +3,9 @@ package com.devonfw.application.pocwithidentificationcounter.general.dataaccess.
 import java.sql.Blob;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Column;
@@ -14,9 +17,11 @@ import com.devonfw.application.pocwithidentificationcounter.general.common.api.B
  */
 @Entity
 @Table(name = "BinaryObject")
-public class BinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject {
+public class BinaryObjectEntity extends ApplicationPersistenceEntity<Long> implements BinaryObject<Long>{
 
   private static final long serialVersionUID = 1L;
+
+  private Long id;
 
   private Blob data;
 
@@ -31,6 +36,19 @@ public class BinaryObjectEntity extends ApplicationPersistenceEntity implements 
 
     super();
   }
+
+  @Override
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Long getId() {
+  	return id;
+  }
+
+  @Override
+  public void setId(Long id) {
+	  this.id = id;
+  }
+
 
   @Override
   public void setMimeType(String mimeType) {
@@ -75,4 +93,6 @@ public class BinaryObjectEntity extends ApplicationPersistenceEntity implements 
 
     this.size = size;
   }
+
+
 }
