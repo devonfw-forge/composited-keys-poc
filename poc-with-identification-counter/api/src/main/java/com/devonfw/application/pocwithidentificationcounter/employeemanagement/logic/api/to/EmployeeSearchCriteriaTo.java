@@ -1,5 +1,6 @@
 package com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractSearchCriteriaTo;
 import com.devonfw.module.basic.common.api.query.StringSearchConfigTo;
 
@@ -11,51 +12,19 @@ public class EmployeeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 
 	private static final long serialVersionUID = 1L;
 
-	private String companyId;
-	private String employeeId;
 	private String name;
+
 	private String lastName;
-	private StringSearchConfigTo companyIdOption;
-	private StringSearchConfigTo employeeIdOption;
+
 	private StringSearchConfigTo nameOption;
+
 	private StringSearchConfigTo lastNameOption;
 
-	/**
-	 * @return companyIdId
-	 */
-
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	/**
-	 * @param companyId setter for companyId attribute
-	 */
-
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-
-	/**
-	 * @return employeeIdId
-	 */
-
-	public String getEmployeeId() {
-		return employeeId;
-	}
-
-	/**
-	 * @param employeeId setter for employeeId attribute
-	 */
-
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
+	private CompositeEmployeeKey id;
 
 	/**
 	 * @return nameId
 	 */
-
 	public String getName() {
 		return name;
 	}
@@ -63,7 +32,6 @@ public class EmployeeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @param name setter for name attribute
 	 */
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -71,7 +39,6 @@ public class EmployeeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @return lastNameId
 	 */
-
 	public String getLastName() {
 		return lastName;
 	}
@@ -79,43 +46,8 @@ public class EmployeeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @param lastName setter for lastName attribute
 	 */
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the {@link StringSearchConfigTo} used to search for
-	 *         {@link #getCompanyId() companyId}.
-	 */
-	public StringSearchConfigTo getCompanyIdOption() {
-
-		return this.companyIdOption;
-	}
-
-	/**
-	 * @param companyIdOption new value of {@link #getCompanyIdOption()}.
-	 */
-	public void setCompanyIdOption(StringSearchConfigTo companyIdOption) {
-
-		this.companyIdOption = companyIdOption;
-	}
-
-	/**
-	 * @return the {@link StringSearchConfigTo} used to search for
-	 *         {@link #getEmployeeId() employeeId}.
-	 */
-	public StringSearchConfigTo getEmployeeIdOption() {
-
-		return this.employeeIdOption;
-	}
-
-	/**
-	 * @param employeeIdOption new value of {@link #getEmployeeIdOption()}.
-	 */
-	public void setEmployeeIdOption(StringSearchConfigTo employeeIdOption) {
-
-		this.employeeIdOption = employeeIdOption;
 	}
 
 	/**
@@ -150,6 +82,20 @@ public class EmployeeSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	public void setLastNameOption(StringSearchConfigTo lastNameOption) {
 
 		this.lastNameOption = lastNameOption;
+	}
+
+	/**
+	 * @return idId
+	 */
+	public CompositeEmployeeKey getId() {
+		return id;
+	}
+
+	/**
+	 * @param id setter for id attribute
+	 */
+	public void setId(CompositeEmployeeKey id) {
+		this.id = id;
 	}
 
 }

@@ -8,10 +8,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 import org.springframework.data.domain.Page;
-
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.Employeemanagement;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeSearchCriteriaTo;
 
@@ -32,7 +32,7 @@ public interface EmployeemanagementRestService {
 	 */
 	@GET
 	@Path("/employee/{id}/")
-	public EmployeeEto getEmployee(@PathParam("id") long id);
+	public EmployeeEto getEmployee(@PathParam("id") CompositeEmployeeKey id);
 
 	/**
 	 * Delegates to {@link Employeemanagement#saveEmployee}.
@@ -51,7 +51,7 @@ public interface EmployeemanagementRestService {
 	 */
 	@DELETE
 	@Path("/employee/{id}/")
-	public void deleteEmployee(@PathParam("id") long id);
+	public void deleteEmployee(@PathParam("id") CompositeEmployeeKey id);
 
 	/**
 	 * Delegates to {@link Employeemanagement#findEmployeeEtos}.
@@ -64,4 +64,28 @@ public interface EmployeemanagementRestService {
 	@POST
 	public Page<EmployeeEto> findEmployees(EmployeeSearchCriteriaTo searchCriteriaTo);
 
+	/**
+	 * Delegates to {@link Employeemanagement#findEmployeeCto}.
+	 *
+	 * @param id the ID of the {@link EmployeeCto}
+	 * @return the {@link EmployeeCto}
+	 */
+	@GET
+	@Path("/employee/cto/{id}/")
+	public EmployeeCto getEmployeeCto(@PathParam("id") CompositeEmployeeKey id);
+
+	/**
+	 * Delegates to {@link Employeemanagement#findEmployeeCtos}.
+	 *
+	 * @param searchCriteriaTo the pagination and search criteria to be used for
+	 *                         finding employees.
+	 * @return the {@link Page list} of matching {@link EmployeeCto}s.
+	 */
+	@Path("/employee/cto/search")
+	@POST
+	public Page<EmployeeCto> findEmployeeCtos(EmployeeSearchCriteriaTo searchCriteriaTo);
+
+	@Path("/employee/cto")
+	@POST
+	public EmployeeCto saveEmployeePhone(EmployeeCto employee);
 }

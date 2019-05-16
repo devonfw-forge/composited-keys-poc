@@ -69,7 +69,8 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
     String[] unsecuredResources = new String[] { "/login", "/security/**", "/services/rest/login",
     "/services/rest/logout" };
 
-    http
+
+    /**http
         //
         .userDetailsService(this.userDetailsService)
         // define all urls that are not to be secured
@@ -87,7 +88,9 @@ public abstract class BaseWebSecurityConfig extends WebSecurityConfigurerAdapter
 
         // register login and logout filter that handles rest logins
         .addFilterAfter(getSimpleRestAuthenticationFilter(), BasicAuthenticationFilter.class)
-        .addFilterAfter(getSimpleRestLogoutFilter(), LogoutFilter.class);
+        .addFilterAfter(getSimpleRestLogoutFilter(), LogoutFilter.class);*/
+
+    http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
 
     if (this.corsEnabled) {
       http.addFilterBefore(getCorsFilter(), CsrfFilter.class);

@@ -5,7 +5,9 @@ import javax.inject.Named;
 
 import org.springframework.data.domain.Page;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.Employeemanagement;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeSearchCriteriaTo;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.service.api.rest.EmployeemanagementRestService;
@@ -21,7 +23,7 @@ public class EmployeemanagementRestServiceImpl implements EmployeemanagementRest
 	private Employeemanagement employeemanagement;
 
 	@Override
-	public EmployeeEto getEmployee(long id) {
+	public EmployeeEto getEmployee(CompositeEmployeeKey id) {
 		return this.employeemanagement.findEmployee(id);
 	}
 
@@ -31,7 +33,7 @@ public class EmployeemanagementRestServiceImpl implements EmployeemanagementRest
 	}
 
 	@Override
-	public void deleteEmployee(long id) {
+	public void deleteEmployee(CompositeEmployeeKey id) {
 		this.employeemanagement.deleteEmployee(id);
 	}
 
@@ -39,4 +41,20 @@ public class EmployeemanagementRestServiceImpl implements EmployeemanagementRest
 	public Page<EmployeeEto> findEmployees(EmployeeSearchCriteriaTo searchCriteriaTo) {
 		return this.employeemanagement.findEmployees(searchCriteriaTo);
 	}
+
+	@Override
+	public EmployeeCto getEmployeeCto(CompositeEmployeeKey id) {
+		return this.employeemanagement.findEmployeeCto(id);
+	}
+
+	@Override
+	public Page<EmployeeCto> findEmployeeCtos(EmployeeSearchCriteriaTo searchCriteriaTo) {
+		return this.employeemanagement.findEmployeeCtos(searchCriteriaTo);
+	}
+
+	@Override
+	public EmployeeCto saveEmployeePhone(EmployeeCto employee) {
+		return this.employeemanagement.saveEmployeePhone(employee);
+	}
+
 }

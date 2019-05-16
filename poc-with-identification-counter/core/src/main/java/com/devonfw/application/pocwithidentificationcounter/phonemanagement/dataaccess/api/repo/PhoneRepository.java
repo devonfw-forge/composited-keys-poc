@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api.PhoneEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneSearchCriteriaTo;
 import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
@@ -40,9 +42,9 @@ public interface PhoneRepository extends DefaultRepository<PhoneEntity> {
 		if (description != null && !description.isEmpty()) {
 			QueryUtil.get().whereString(query, $(alias.getDescription()), description, criteria.getDescriptionOption());
 		}
-		Long employee = criteria.getEmployeeId();
+		CompositeEmployeeKey employee = criteria.getEmployeeId();
 		if (employee != null) {
-			query.where($(alias.getEmployee().getId()).eq(employee));
+			query.where($(alias.getEmployee().getId()).eq(new CompositeEmployeeKeyImpl(employee)));
 		}
 		if (criteria.getPageable() == null) {
 			criteria.setPageable(PageRequest.of(0, Integer.MAX_VALUE));
@@ -55,7 +57,7 @@ public interface PhoneRepository extends DefaultRepository<PhoneEntity> {
 
 	/**
 	 * Add sorting to the given query on the given alias
-	 * 
+	 *
 	 * @param query to add sorting to
 	 * @param alias to retrieve columns from for sorting
 	 * @param sort  specification of sorting
@@ -82,9 +84,9 @@ public interface PhoneRepository extends DefaultRepository<PhoneEntity> {
 					break;
 				case "employee":
 					if (next.isAscending()) {
-						query.orderBy($(alias.getEmployee().getId()).asc());
+						query.orderBy($(alias.getEmployee().getId().toString()).asc());
 					} else {
-						query.orderBy($(alias.getEmployee().getId()).desc());
+						query.orderBy($(alias.getEmployee().getId().toString()).desc());
 					}
 					break;
 				default:

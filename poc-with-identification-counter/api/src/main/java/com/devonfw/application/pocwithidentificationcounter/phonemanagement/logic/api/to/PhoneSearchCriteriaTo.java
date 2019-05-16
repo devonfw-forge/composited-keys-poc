@@ -1,5 +1,6 @@
 package com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractSearchCriteriaTo;
 import com.devonfw.module.basic.common.api.query.StringSearchConfigTo;
 
@@ -12,16 +13,18 @@ public class PhoneSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	private static final long serialVersionUID = 1L;
 
 	private String number;
+
 	private String description;
 
-	private Long employeeId;
+	private CompositeEmployeeKey employeeId;
+
 	private StringSearchConfigTo numberOption;
+
 	private StringSearchConfigTo descriptionOption;
 
 	/**
 	 * @return numberId
 	 */
-
 	public String getNumber() {
 		return number;
 	}
@@ -29,7 +32,6 @@ public class PhoneSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @param number setter for number attribute
 	 */
-
 	public void setNumber(String number) {
 		this.number = number;
 	}
@@ -37,7 +39,6 @@ public class PhoneSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @return descriptionId
 	 */
-
 	public String getDescription() {
 		return description;
 	}
@@ -45,26 +46,23 @@ public class PhoneSearchCriteriaTo extends AbstractSearchCriteriaTo {
 	/**
 	 * @param description setter for description attribute
 	 */
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
 	 * getter for employeeId attribute
-	 * 
+	 *
 	 * @return employeeId
 	 */
-
-	public Long getEmployeeId() {
+	public CompositeEmployeeKey getEmployeeId() {
 		return employeeId;
 	}
 
 	/**
 	 * @param employee setter for employee attribute
 	 */
-
-	public void setEmployeeId(Long employeeId) {
+	public void setEmployeeId(CompositeEmployeeKey employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -101,5 +99,6 @@ public class PhoneSearchCriteriaTo extends AbstractSearchCriteriaTo {
 
 		this.descriptionOption = descriptionOption;
 	}
+
 
 }

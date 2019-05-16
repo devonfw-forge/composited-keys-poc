@@ -1,6 +1,7 @@
 package com.devonfw.application.pocwithidentificationcounter.phonemanagement.service.api.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.Phonemanagement;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneCto;
+import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneSearchCriteriaTo;
 
 /**
@@ -43,5 +45,13 @@ public interface PhonemanagementRestService {
 	@Path("/phone/cto/search")
 	@POST
 	public Page<PhoneCto> findPhoneCtos(PhoneSearchCriteriaTo searchCriteriaTo);
+
+	@Path("/phone/")
+	@POST
+	public PhoneEto savePhone(PhoneEto phoneEto);
+
+	@Path("/phone/")
+	@DELETE
+	public boolean deletePhone(long id);
 
 }

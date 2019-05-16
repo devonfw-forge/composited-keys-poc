@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.Phonemanagement;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneCto;
+import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneSearchCriteriaTo;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.service.api.rest.PhonemanagementRestService;
 
@@ -29,4 +30,15 @@ public class PhonemanagementRestServiceImpl implements PhonemanagementRestServic
 	public Page<PhoneCto> findPhoneCtos(PhoneSearchCriteriaTo searchCriteriaTo) {
 		return this.phonemanagement.findPhoneCtos(searchCriteriaTo);
 	}
+
+	@Override
+	public PhoneEto savePhone(PhoneEto phoneEto) {
+		return this.phonemanagement.savePhone(phoneEto);
+	}
+
+	@Override
+	public boolean deletePhone(long id) {
+		return this.phonemanagement.deletePhone(id);
+	}
+
 }

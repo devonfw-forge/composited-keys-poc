@@ -1,5 +1,7 @@
 package com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.usecase;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
 
 /**
@@ -15,7 +17,7 @@ public interface UcManageEmployee {
 	 * @return boolean <code>true</code> if the employee can be deleted,
 	 *         <code>false</code> otherwise
 	 */
-	boolean deleteEmployee(long employeeId);
+	boolean deleteEmployee(CompositeEmployeeKey employeeId);
 
 	/**
 	 * Saves a employee and store it in the database.
@@ -25,4 +27,5 @@ public interface UcManageEmployee {
 	 */
 	EmployeeEto saveEmployee(EmployeeEto employee);
 
+	EmployeeCto saveEmployeePhone(EmployeeCto employeeCto);
 }

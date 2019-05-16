@@ -8,8 +8,10 @@ import org.springframework.data.domain.Page;
 import com.devonfw.application.pocwithidentificationcounter.general.logic.base.AbstractComponentFacade;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.Phonemanagement;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneCto;
+import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneSearchCriteriaTo;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.usecase.UcFindPhone;
+import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.usecase.UcManagePhone;
 
 /**
  * Implementation of component interface of phonemanagement
@@ -19,6 +21,9 @@ public class PhonemanagementImpl extends AbstractComponentFacade implements Phon
 
 	@Inject
 	private UcFindPhone ucFindPhone;
+
+	@Inject
+	private UcManagePhone ucManagePhone;
 
 	@Override
 	public PhoneCto findPhoneCto(long id) {
@@ -31,4 +36,16 @@ public class PhonemanagementImpl extends AbstractComponentFacade implements Phon
 
 		return ucFindPhone.findPhoneCtos(criteria);
 	}
+
+	@Override
+	public PhoneEto savePhone(PhoneEto phoneEto) {
+
+		return ucManagePhone.savePhone(phoneEto);
+	}
+
+	@Override
+	public boolean deletePhone(long id) {
+		return ucManagePhone.deletePhone(id);
+	}
+
 }

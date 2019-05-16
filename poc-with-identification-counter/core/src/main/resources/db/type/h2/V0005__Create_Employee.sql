@@ -4,5 +4,5 @@ CREATE TABLE employee(
 	modificationCounter INTEGER NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	lastName VARCHAR(255) NOT NULL,
-	CONSTRAINT PK_Employee PRIMARY KEY ( companyId, employeeId );
+	CONSTRAINT PK_Employee PRIMARY KEY ( companyId, employeeId )
 );

@@ -1,19 +1,21 @@
 package com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
+import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.common.api.Phone;
-import com.devonfw.module.basic.common.api.to.AbstractEto;
 
 /**
  * Entity transport object of Phone
  */
-public class PhoneEto extends AbstractEto implements Phone {
+public class PhoneEto extends AbstractGenericEto<Long> implements Phone<Long> {
 
 	private static final long serialVersionUID = 1L;
 
 	private String number;
+
 	private String description;
 
-	private Long employeeId;
+	private CompositeEmployeeKey employeeId;
 
 	@Override
 	public String getNumber() {
@@ -36,12 +38,12 @@ public class PhoneEto extends AbstractEto implements Phone {
 	}
 
 	@Override
-	public Long getEmployeeId() {
+	public CompositeEmployeeKey getEmployeeId() {
 		return employeeId;
 	}
 
 	@Override
-	public void setEmployeeId(Long employeeId) {
+	public void setEmployeeId(CompositeEmployeeKey employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -94,4 +96,5 @@ public class PhoneEto extends AbstractEto implements Phone {
 		}
 		return true;
 	}
+
 }

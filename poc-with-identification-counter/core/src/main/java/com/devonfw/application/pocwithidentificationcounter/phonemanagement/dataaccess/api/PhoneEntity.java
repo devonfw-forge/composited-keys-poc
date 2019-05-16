@@ -1,13 +1,13 @@
 package com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.common.api.Phone;
 import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationPersistenceEntity;
@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "phone")
-public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
+public class PhoneEntity extends ApplicationPersistenceEntity<Long> implements Phone<Long> {
 
 	private String number;
 
@@ -41,12 +41,10 @@ public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
 		this.description = description;
 	}
 
-	@ManyToOne(cascade=CascadeType.DETACH,fetch=FetchType.EAGER)
-	@MapsId("employeeCompositeId")
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumns({
-		@JoinColumn(name="companyId",referencedColumnName="companyId"),
-		@JoinColumn(name="employeeId",referencedColumnName="employeeId")
-
+		@JoinColumn(name="companyId"),
+		@JoinColumn(name="employeeId")
 	})
 	public EmployeeEntity getEmployee() {
 		return employee;
@@ -58,7 +56,7 @@ public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
 
 	@Override
 	@Transient
-	public Long getEmployeeId() {
+	public CompositeEmployeeKey getEmployeeId() {
 
 		if (this.employee == null) {
 			return null;
@@ -67,13 +65,13 @@ public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
 	}
 
 	@Override
-	public void setEmployeeId(Long employeeId) {
+	public void setEmployeeId(CompositeEmployeeKey employeeId) {
 
 		if (employeeId == null) {
 			this.employee = null;
 		} else {
 			EmployeeEntity employeeEntity = new EmployeeEntity();
-			employeeEntity.setId(employeeId);
+			employeeEntity.setId(new CompositeEmployeeKeyImpl(employeeId));
 			this.employee = employeeEntity;
 		}
 	}

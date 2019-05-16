@@ -9,16 +9,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeSearchCriteriaTo;
 import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
 import com.devonfw.module.jpa.dataaccess.api.data.DefaultRepository;
+import com.devonfw.module.jpa.dataaccess.api.data.GenericRepository;
 import com.querydsl.jpa.impl.JPAQuery;
 
 /**
  * {@link DefaultRepository} for {@link EmployeeEntity}
  */
-public interface EmployeeRepository extends DefaultRepository<EmployeeEntity> {
+public interface EmployeeRepository
+extends GenericRepository<EmployeeEntity, CompositeEmployeeKeyImpl>{
 
 	/**
 	 * @param criteria the {@link EmployeeSearchCriteriaTo} with the criteria to
@@ -32,13 +36,9 @@ public interface EmployeeRepository extends DefaultRepository<EmployeeEntity> {
 		EmployeeEntity alias = newDslAlias();
 		JPAQuery<EmployeeEntity> query = newDslQuery(alias);
 
-		String companyId = criteria.getCompanyId();
-		if (companyId != null && !companyId.isEmpty()) {
-			QueryUtil.get().whereString(query, $(alias.getCompanyId()), companyId, criteria.getCompanyIdOption());
-		}
-		String employeeId = criteria.getEmployeeId();
-		if (employeeId != null && !employeeId.isEmpty()) {
-			QueryUtil.get().whereString(query, $(alias.getEmployeeId()), employeeId, criteria.getEmployeeIdOption());
+		CompositeEmployeeKey id = criteria.getId();
+		if (id != null) {
+			query.where($(alias.getId()).eq(new CompositeEmployeeKeyImpl(id)));
 		}
 		String name = criteria.getName();
 		if (name != null && !name.isEmpty()) {
@@ -59,7 +59,7 @@ public interface EmployeeRepository extends DefaultRepository<EmployeeEntity> {
 
 	/**
 	 * Add sorting to the given query on the given alias
-	 * 
+	 *
 	 * @param query to add sorting to
 	 * @param alias to retrieve columns from for sorting
 	 * @param sort  specification of sorting
@@ -70,18 +70,11 @@ public interface EmployeeRepository extends DefaultRepository<EmployeeEntity> {
 			while (it.hasNext()) {
 				Order next = it.next();
 				switch (next.getProperty()) {
-				case "companyId":
+				case "id":
 					if (next.isAscending()) {
-						query.orderBy($(alias.getCompanyId()).asc());
+						query.orderBy($(alias.getId().toString()).asc());
 					} else {
-						query.orderBy($(alias.getCompanyId()).desc());
-					}
-					break;
-				case "employeeId":
-					if (next.isAscending()) {
-						query.orderBy($(alias.getEmployeeId()).asc());
-					} else {
-						query.orderBy($(alias.getEmployeeId()).desc());
+						query.orderBy($(alias.getId().toString()).desc());
 					}
 					break;
 				case "name":

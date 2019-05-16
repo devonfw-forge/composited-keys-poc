@@ -1,39 +1,21 @@
 package com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.Employee;
-import com.devonfw.module.basic.common.api.to.AbstractEto;
+import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto;
 
 /**
  * Entity transport object of Employee
  */
-public class EmployeeEto extends AbstractEto implements Employee {
+public class EmployeeEto extends AbstractGenericEto<CompositeEmployeeKey> implements Employee<CompositeEmployeeKey> {
 
 	private static final long serialVersionUID = 1L;
 
-	private String companyId;
-	private String employeeId;
+	private CompositeEmployeeKey id;
+
 	private String name;
+
 	private String lastName;
-
-	@Override
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	@Override
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-
-	@Override
-	public String getEmployeeId() {
-		return employeeId;
-	}
-
-	@Override
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
 
 	@Override
 	public String getName() {
@@ -55,12 +37,19 @@ public class EmployeeEto extends AbstractEto implements Employee {
 		this.lastName = lastName;
 	}
 
+	public CompositeEmployeeKey getId() {
+		return id;
+	}
+
+	public void setId(CompositeEmployeeKey id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((this.companyId == null) ? 0 : this.companyId.hashCode());
-		result = prime * result + ((this.employeeId == null) ? 0 : this.employeeId.hashCode());
+		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
 		result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
 		result = prime * result + ((this.lastName == null) ? 0 : this.lastName.hashCode());
 		return result;
@@ -80,18 +69,11 @@ public class EmployeeEto extends AbstractEto implements Employee {
 			return false;
 		}
 		EmployeeEto other = (EmployeeEto) obj;
-		if (this.companyId == null) {
-			if (other.companyId != null) {
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!this.companyId.equals(other.companyId)) {
-			return false;
-		}
-		if (this.employeeId == null) {
-			if (other.employeeId != null) {
-				return false;
-			}
-		} else if (!this.employeeId.equals(other.employeeId)) {
+		} else if (!this.id.equals(other.id)) {
 			return false;
 		}
 		if (this.name == null) {
@@ -110,4 +92,5 @@ public class EmployeeEto extends AbstractEto implements Employee {
 		}
 		return true;
 	}
+
 }

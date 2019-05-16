@@ -2,54 +2,37 @@ package com.devonfw.application.pocwithidentificationcounter.employeemanagement.
 
 import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationEntity;
 
-public interface Employee extends ApplicationEntity {
+public interface Employee<T extends CompositeEmployeeKey> extends ApplicationEntity<T> {
 
 	/**
-	 * @return companyIdId
+	 * @return idId
 	 */
-
-	public String getCompanyId();
+	public T getId();
 
 	/**
-	 * @param companyId setter for companyId attribute
+	 * @param id setter for id attribute
 	 */
-
-	public void setCompanyId(String companyId);
-
-	/**
-	 * @return employeeIdId
-	 */
-
-	public String getEmployeeId();
-
-	/**
-	 * @param employeeId setter for employeeId attribute
-	 */
-
-	public void setEmployeeId(String employeeId);
+	public void setId(T id);
 
 	/**
 	 * @return nameId
 	 */
-
 	public String getName();
 
 	/**
 	 * @param name setter for name attribute
 	 */
-
 	public void setName(String name);
 
 	/**
 	 * @return lastNameId
 	 */
-
 	public String getLastName();
 
 	/**
 	 * @param lastName setter for lastName attribute
 	 */
-
 	public void setLastName(String lastName);
+
 
 }

@@ -30,7 +30,9 @@ import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logi
 @Transactional
 public class UcFindPhoneImpl extends AbstractPhoneUc implements UcFindPhone {
 
-	/** Logger instance. */
+	/**
+	 * Logger instance.
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(UcFindPhoneImpl.class);
 
 	@Override
@@ -60,4 +62,5 @@ public class UcFindPhoneImpl extends AbstractPhoneUc implements UcFindPhone {
 
 		return new PageImpl<>(ctos, pagResultTo, phones.getTotalElements());
 	}
+
 }
