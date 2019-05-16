@@ -1,3 +1,115 @@
-= composited keys poc
+= Composited keys POC
 
-This proof of concept will try to adapt the current devon4j and cobigen structure to a more generic one that will allow with few changes to adapt the type of id so it can also admit not only Long but also  EmbbededId objects.
+This proof of concept will try to adapt the current devon4j and CobiGen structure to a more generic one that will allow with few changes to adapt the type of id so it can also admit not only Long but also  EmbbededId objects.
+
+= POC description
+
+The relationship chosen for the POC is a OneToMany between Employee and Phone. Employee being the entity that has the Composite Key as an id and Phone being a normal entity that uses default devon4j/CobiGen values (Long id).
+
+.Employee
+|===
+|PK/FK |Name |Type
+
+|PK
+|companyId
+|VARCHAR(10) NOT NULL
+
+|PK
+|employeeId
+|VARCHAR(10) NOT NULL
+
+|
+|modificationCounter
+|INTEGER NOT NULL
+
+|
+|name
+|VARCHAR(255) NOT NULL
+
+|
+|lastname
+|VARCHAR(255) NOT NULL
+|===
+
+
+.Phone
+|===
+|PK/FK |Name |Type
+
+|PK
+|id
+|BIGINT NOT NULL AUTO_INCREMENT
+
+|
+|modificationCounter
+|INTEGER NOT NULL
+
+|
+|number
+|VARCHAR(255) NOT NULL
+
+|
+|description
+|VARCHAR(255) NOT NULL
+
+|FK
+|companyId
+|VARCHAR(10) NOT NULL
+
+|FK
+|employeeId
+|VARCHAR(10) NOT NULL
+|===
+
+= Changes done to the devon4j structure in the poc:
+
+In this https://github.com/devonfw-forge/composited-keys-poc/commit/0a61b6268dfa176b9232ddc98e5cc30719f4a04e#diff-e9f0e6e10f525028c2e4307854b27662[commit] the different changes that were done to the devon4j structure can be seen. 
+
+List of the classes changed:
+
+  - ApplicationEntity
+  - ApplicationPersistenceEntity
+  - BinaryObject
+  - BinaryObjectEto
+  - BinaryObjectEntity
+
+List of the classes that couldnt be changed and had to be recreated:
+
+  - AbstractEto: This class couldnt be changed because its on the internal parts of the devon4j structure. In order to be able to do the poc, a substitute called https://github.com/devonfw-forge/composited-keys-poc/blob/master/poc-with-identification-counter/api/src/main/java/com/devonfw/application/pocwithidentificationcounter/general/common/api/to/AbstractGenericEto.java[AbstractGeneriEto] was created to replace it.
+
+Generated classes:
+
+Since this change doesnt break the devon4j structure, the default entities with Long can still be generated, allowing for change only when its necessary. In order to do so, the following changes to the classes when they get generated are necessary:
+
+  For purpose of an example we will use "Name" as a substitute of the entity/table name.
+
+NameEntity(entity):
+[source]
+----
+public class NameEntity extends ApplicationPersistenceEntity<Long> implements Name<Long>
+----
+
+Name(Interface of the entity):
+[source]
+----
+public interface Name<T> extends ApplicationEntity<T>
+----
+
+NameEto(Eto):
+[source]
+----
+public class NameEto extends AbstractGenericEto<Long> implements Name<Long>
+----
+
+= Extra things done to allow for a CompositeKey
+
+== Creating the CompositeKey Object
+
+In one hand, by default the CORE side of an application of devon4j cannot have access to the API part. On the other hand, the CORE has access to the API. This fact will generate some difficulties due to:
+
+  - In the api, i cant use any annotations due to the library only being allowed to be used in the core. This immediately closes the possibility of only creating a the CompositeKeyObject in the API alone since the '@Embeddable' annotation is necessary for an @EmbeddedId to work.
+  - Creating the object in the core would not allow for some of the API side classes to access it like, for example, the ETO.
+
+The only solution that was found, was to create a class in API that will be extended by the one at the CORE. This will allow to pass from one to the other one by creating objects.
+
+All these changes, together with the changes that were needed to use a compositekey are on the following https://github.com/devonfw-forge/composited-keys-poc/commit/54054c9bc5223830ead0ceacf7f01d070e9ee9fe[commit]
