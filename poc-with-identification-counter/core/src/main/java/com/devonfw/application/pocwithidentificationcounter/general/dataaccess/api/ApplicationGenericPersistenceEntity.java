@@ -10,11 +10,11 @@ import com.devonfw.application.pocwithidentificationcounter.general.common.api.A
 import com.devonfw.module.basic.common.api.entity.PersistenceEntity;
 
 @MappedSuperclass
-public abstract class ApplicationGenericPersistenceEntity<T> implements ApplicationGenericEntity<T>, PersistenceEntity<T> {
+public abstract class ApplicationGenericPersistenceEntity<ID> implements ApplicationGenericEntity<ID>, PersistenceEntity<ID> {
 
   private static final long serialVersionUID = 1L;
 
-  private T id;
+  private ID id;
 
   private int modificationCounter;
 
@@ -29,13 +29,13 @@ public abstract class ApplicationGenericPersistenceEntity<T> implements Applicat
   @Override
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public T getId() {
+  public ID getId() {
 
     return this.id;
   }
 
   @Override
-  public void setId(T id) {
+  public void setId(ID id) {
 
     this.id = id;
   }

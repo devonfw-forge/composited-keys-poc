@@ -3,15 +3,15 @@ package com.devonfw.application.pocwithidentificationcounter.general.common.api.
 import com.devonfw.module.basic.common.api.entity.GenericEntity;
 import com.devonfw.module.basic.common.api.to.AbstractTo;
 
-public abstract class AbstractGenericEto<T> extends AbstractTo implements GenericEntity<T> {
+public abstract class AbstractGenericEto<ID> extends AbstractTo implements GenericEntity<ID> {
 
 	  private static final long serialVersionUID = 1L;
 
-	  private T id;
+	  private ID id;
 
 	  private int modificationCounter;
 
-	  private transient GenericEntity<T> persistentEntity;
+	  private transient GenericEntity<ID> persistentEntity;
 
 	  /**
 	   * The constructor.
@@ -22,13 +22,13 @@ public abstract class AbstractGenericEto<T> extends AbstractTo implements Generi
 	  }
 
 	  @Override
-	  public T getId() {
+	  public ID getId() {
 
 	    return this.id;
 	  }
 
 	  @Override
-	  public void setId(T id) {
+	  public void setId(ID id) {
 
 	    this.id = id;
 	  }
@@ -82,7 +82,7 @@ public abstract class AbstractGenericEto<T> extends AbstractTo implements Generi
 	     * @param eto is the {@link AbstractEto ETO}.
 	     * @param persistentEntity is the persistent {@link GenericEntity entity}.
 	     */
-	    protected <T> void setPersistentEntity(AbstractGenericEto<T> eto, GenericEntity<T> persistentEntity) {
+	    protected <ID> void setPersistentEntity(AbstractGenericEto<ID> eto, GenericEntity<ID> persistentEntity) {
 
 	      assert ((eto.persistentEntity == null) || (persistentEntity == null));
 	      eto.persistentEntity = persistentEntity;
