@@ -2,18 +2,13 @@ package com.devonfw.application.pocwithidentificationcounter.phonemanagement.log
 
 import java.util.Objects;
 
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.Employeemanagement;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api.PhoneEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.usecase.UcManagePhone;
@@ -25,11 +20,6 @@ import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logi
 public class UcManagePhoneImpl extends AbstractPhoneUc implements UcManagePhone{
 
 	private static final Logger LOG = LoggerFactory.getLogger(UcManagePhoneImpl.class);
-
-	@Inject
-	Employeemanagement employeemanagement;
-	@PersistenceContext
-	private EntityManager em;
 	@Override
 	public PhoneEto savePhone(PhoneEto phone) {
 		Objects.requireNonNull(phone, "phone");
@@ -38,8 +28,9 @@ public class UcManagePhoneImpl extends AbstractPhoneUc implements UcManagePhone{
 
 		PhoneEntity resultEntity = getPhoneRepository().save(phoneEntity);
 		LOG.debug("Phone with id '{}' has been created.", resultEntity.getId());
-		LOG.info("Phone entity '{}' has been created.", ReflectionToStringBuilder.toString(resultEntity));
 		return getBeanMapper().map(phoneEntity, PhoneEto.class);
+
+
 	}
 
 	@Override

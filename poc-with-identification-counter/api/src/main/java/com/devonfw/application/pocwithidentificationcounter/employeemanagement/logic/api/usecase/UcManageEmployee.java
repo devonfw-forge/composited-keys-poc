@@ -26,6 +26,11 @@ public interface UcManageEmployee {
 	 * @return the new {@link EmployeeEto} that has been saved with ID and version.
 	 */
 	EmployeeEto saveEmployee(EmployeeEto employee);
-
+	/**
+	 * Saves a employee and its phones and stores it in the database.
+	 *
+	 * @param employeeCto the {@link EmployeeCto} to create.
+	 * @return the new {@link EmployeeCto} that has been saved with ID and version.
+	 */
 	EmployeeCto saveEmployeePhone(EmployeeCto employeeCto);
 }
