@@ -1,13 +1,13 @@
 package com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.common.api.Phone;
+import com.devonfw.module.basic.common.api.to.AbstractEto;
 
 /**
  * Entity transport object of Phone
  */
-public class PhoneEto extends AbstractGenericEto<Long> implements Phone<Long> {
+public class PhoneEto extends AbstractEto implements Phone {
 
 	private static final long serialVersionUID = 1L;
 

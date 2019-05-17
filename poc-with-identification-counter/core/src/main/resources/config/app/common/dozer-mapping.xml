@@ -28,6 +28,14 @@
        serialization. -->
     <mapping type="one-way">
 	    <class-a>com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationPersistenceEntity</class-a>
+	    <class-b>com.devonfw.module.basic.common.api.to.AbstractEto</class-b>
+	    <field custom-converter="com.devonfw.module.beanmapping.common.impl.dozer.IdentityConverter">
+	      <a>this</a>
+	      <b is-accessible="true">persistentEntity</b>
+	    </field>
+ 	</mapping>
+    <mapping type="one-way">
+	    <class-a>com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationGenericPersistenceEntity</class-a>
 	    <class-b>com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto</class-b>
 	    <field custom-converter="com.devonfw.module.beanmapping.common.impl.dozer.IdentityConverter">
 	      <a>this</a>

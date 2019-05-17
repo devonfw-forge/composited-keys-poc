@@ -1,12 +1,12 @@
 package com.devonfw.application.pocwithidentificationcounter.general.logic.api.to;
 
 import com.devonfw.application.pocwithidentificationcounter.general.common.api.BinaryObject;
-import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto;
+import com.devonfw.module.basic.common.api.to.AbstractEto;
 
 /**
  * The {@link com.devonfw.module.basic.common.api.to.AbstractEto ETO} for a {@link BinaryObject}.
  */
-public class BinaryObjectEto<T> extends AbstractGenericEto<T> implements BinaryObject<T> {
+public class BinaryObjectEto extends AbstractEto implements BinaryObject {
 
   private static final long serialVersionUID = 1L;
 

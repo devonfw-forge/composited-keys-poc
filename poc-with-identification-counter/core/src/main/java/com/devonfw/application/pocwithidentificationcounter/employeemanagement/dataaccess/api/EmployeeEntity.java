@@ -13,12 +13,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.Employee;
-import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationPersistenceEntity;
+import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationGenericPersistenceEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api.PhoneEntity;
 
 @Entity
 @Table(name = "employee")
-public class EmployeeEntity extends ApplicationPersistenceEntity<CompositeEmployeeKeyImpl>
+public class EmployeeEntity extends ApplicationGenericPersistenceEntity<CompositeEmployeeKeyImpl>
 		implements Employee<CompositeEmployeeKeyImpl> {
 
 

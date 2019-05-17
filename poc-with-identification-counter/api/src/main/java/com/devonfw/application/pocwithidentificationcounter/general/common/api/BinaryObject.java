@@ -3,7 +3,7 @@ package com.devonfw.application.pocwithidentificationcounter.general.common.api;
 /**
  * This is the interface for a {@link BinaryObject} of the poc-with-identification-counter.
  */
-public interface BinaryObject<T> extends ApplicationEntity<T> {
+public interface BinaryObject extends ApplicationEntity {
 
   /**
    * @param mimeType is the MIME-Type of this {@link BinaryObject}

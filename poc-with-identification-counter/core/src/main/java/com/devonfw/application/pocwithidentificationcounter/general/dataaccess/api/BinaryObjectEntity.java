@@ -14,7 +14,7 @@ import com.devonfw.application.pocwithidentificationcounter.general.common.api.B
  */
 @Entity
 @Table(name = "BinaryObject")
-public class BinaryObjectEntity extends ApplicationPersistenceEntity<Long> implements BinaryObject<Long>{
+public class BinaryObjectEntity extends ApplicationPersistenceEntity implements BinaryObject{
 
   private static final long serialVersionUID = 1L;
 

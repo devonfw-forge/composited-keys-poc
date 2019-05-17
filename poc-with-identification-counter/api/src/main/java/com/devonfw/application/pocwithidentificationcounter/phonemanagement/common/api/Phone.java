@@ -3,7 +3,7 @@ package com.devonfw.application.pocwithidentificationcounter.phonemanagement.com
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationEntity;
 
-public interface Phone<T> extends ApplicationEntity<T> {
+public interface Phone extends ApplicationEntity {
 
 	/**
 	 * @return numberId

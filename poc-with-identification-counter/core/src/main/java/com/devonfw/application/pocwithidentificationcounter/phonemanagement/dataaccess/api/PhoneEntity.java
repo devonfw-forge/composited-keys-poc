@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "phone")
-public class PhoneEntity extends ApplicationPersistenceEntity<Long> implements Phone<Long> {
+public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
 
 	private String number;
 

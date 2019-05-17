@@ -6,7 +6,6 @@ import com.devonfw.application.pocwithidentificationcounter.employeemanagement.c
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeSearchCriteriaTo;
-import org.springframework.data.domain.Pageable;
 
 public interface UcFindEmployee {
 
