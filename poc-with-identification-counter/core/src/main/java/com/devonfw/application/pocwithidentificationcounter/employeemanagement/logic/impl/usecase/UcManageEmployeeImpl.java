@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
@@ -33,7 +32,7 @@ public class UcManageEmployeeImpl extends AbstractEmployeeUc implements UcManage
 	@Override
 	public boolean deleteEmployee(CompositeEmployeeKey id) {
 
-		EmployeeEntity employee = getEmployeeRepository().find(new CompositeEmployeeKeyImpl(id));
+		EmployeeEntity employee = getEmployeeRepository().find(id);
 		getEmployeeRepository().delete(employee);
 		LOG.debug("The employee with id '{}' has been deleted.", id);
 		return true;

@@ -1,8 +1,10 @@
 package com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api;
 
+import java.io.Serializable;
 
-public class CompositeEmployeeKey{
+public class CompositeEmployeeKey implements Serializable{
 
+    private static final long serialVersionUID = 1L;
 	private String companyId;
 	private String employeeId;
 
@@ -38,4 +40,25 @@ public class CompositeEmployeeKey{
 	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if ( !(other instanceof CompositeEmployeeKey) ) return false;
+
+        final CompositeEmployeeKey compositeEmployeeKey = (CompositeEmployeeKey) other;
+
+        if ( !compositeEmployeeKey.getCompanyId().equals( getCompanyId() ) ) return false;
+        if ( !compositeEmployeeKey.getEmployeeId().equals( getEmployeeId() ) ) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+         int result;
+         result = getCompanyId().hashCode();
+         result = 29 * result + getEmployeeId().hashCode();
+         return result;
+    }
 }

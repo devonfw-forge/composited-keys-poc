@@ -2,12 +2,12 @@ package com.devonfw.application.pocwithidentificationcounter.employeemanagement.
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.Employee;
-import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractGenericEto;
+import com.devonfw.application.pocwithidentificationcounter.general.common.api.to.AbstractComposedKeyEto;
 
 /**
  * Entity transport object of Employee
  */
-public class EmployeeEto extends AbstractGenericEto<CompositeEmployeeKey> implements Employee<CompositeEmployeeKey> {
+public class EmployeeEto extends AbstractComposedKeyEto<CompositeEmployeeKey> implements Employee {
 
 	private static final long serialVersionUID = 1L;
 

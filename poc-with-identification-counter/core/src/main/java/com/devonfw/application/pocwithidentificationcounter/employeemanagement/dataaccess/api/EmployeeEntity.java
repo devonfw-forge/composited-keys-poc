@@ -12,17 +12,17 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.Employee;
-import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationGenericPersistenceEntity;
+import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationComposedKeyPersistenceEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api.PhoneEntity;
 
 @Entity
 @Table(name = "employee")
-public class EmployeeEntity extends ApplicationGenericPersistenceEntity<CompositeEmployeeKeyImpl>
-		implements Employee<CompositeEmployeeKeyImpl> {
+public class EmployeeEntity extends ApplicationComposedKeyPersistenceEntity<CompositeEmployeeKey> implements Employee
+		{
 
-
-	private CompositeEmployeeKeyImpl id;
+	private CompositeEmployeeKey id;
 
 	private String name;
 
@@ -32,20 +32,21 @@ public class EmployeeEntity extends ApplicationGenericPersistenceEntity<Composit
 
 	private static final long serialVersionUID = 1L;
 
+
 	@Override
-	@EmbeddedId
 	@AttributeOverrides({
            @AttributeOverride(name="employeeId",
                 column=@Column(name="employeeId",length=10)),
            @AttributeOverride(name="companyId",
            		column=@Column(name="companyId",length=10)),
     })
-	public CompositeEmployeeKeyImpl getId() {
+	@EmbeddedId
+	public CompositeEmployeeKey getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(CompositeEmployeeKeyImpl id) {
+	public void setId(CompositeEmployeeKey id) {
 		this.id = id;
 	}
 

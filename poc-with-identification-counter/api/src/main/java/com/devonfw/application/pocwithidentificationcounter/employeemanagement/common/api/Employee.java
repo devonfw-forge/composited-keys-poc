@@ -1,18 +1,18 @@
 package com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api;
 
-import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationGenericEntity;
+import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationComposedKeyEntity;
 
-public interface Employee<T extends CompositeEmployeeKey> extends ApplicationGenericEntity<T> {
+public interface Employee extends ApplicationComposedKeyEntity<CompositeEmployeeKey> {
 
 	/**
 	 * @return idId
 	 */
-	public T getId();
+	public CompositeEmployeeKey getId();
 
 	/**
 	 * @param id setter for id attribute
 	 */
-	public void setId(T id);
+	public void setId(CompositeEmployeeKey id);
 
 	/**
 	 * @return nameId

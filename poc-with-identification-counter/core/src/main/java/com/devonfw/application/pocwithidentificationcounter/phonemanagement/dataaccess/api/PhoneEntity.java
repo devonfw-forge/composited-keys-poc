@@ -7,7 +7,6 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.common.api.Phone;
 import com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api.ApplicationPersistenceEntity;
@@ -71,7 +70,7 @@ public class PhoneEntity extends ApplicationPersistenceEntity implements Phone {
 			this.employee = null;
 		} else {
 			EmployeeEntity employeeEntity = new EmployeeEntity();
-			employeeEntity.setId(new CompositeEmployeeKeyImpl(employeeId));
+			employeeEntity.setId(employeeId);
 			this.employee = employeeEntity;
 		}
 	}

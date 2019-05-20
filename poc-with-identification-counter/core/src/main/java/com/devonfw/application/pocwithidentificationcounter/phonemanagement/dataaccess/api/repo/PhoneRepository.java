@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.dataaccess.api.PhoneEntity;
 import com.devonfw.application.pocwithidentificationcounter.phonemanagement.logic.api.to.PhoneSearchCriteriaTo;
 import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
@@ -44,7 +43,7 @@ public interface PhoneRepository extends DefaultRepository<PhoneEntity> {
 		}
 		CompositeEmployeeKey employee = criteria.getEmployeeId();
 		if (employee != null) {
-			query.where($(alias.getEmployee().getId()).eq(new CompositeEmployeeKeyImpl(employee)));
+			query.where($(alias.getEmployee().getId()).eq(employee));
 		}
 		if (criteria.getPageable() == null) {
 			criteria.setPageable(PageRequest.of(0, Integer.MAX_VALUE));

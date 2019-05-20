@@ -1,9 +1,11 @@
 package com.devonfw.application.pocwithidentificationcounter.general.common.api.to;
 
+import java.io.Serializable;
+
 import com.devonfw.module.basic.common.api.entity.GenericEntity;
 import com.devonfw.module.basic.common.api.to.AbstractTo;
 
-public abstract class AbstractGenericEto<ID> extends AbstractTo implements GenericEntity<ID> {
+public abstract class AbstractComposedKeyEto<ID extends Serializable> extends AbstractTo implements GenericEntity<ID> {
 
 	  private static final long serialVersionUID = 1L;
 
@@ -16,7 +18,7 @@ public abstract class AbstractGenericEto<ID> extends AbstractTo implements Gener
 	  /**
 	   * The constructor.
 	   */
-	  public AbstractGenericEto() {
+	  public AbstractComposedKeyEto() {
 
 	    super();
 	  }
@@ -82,7 +84,7 @@ public abstract class AbstractGenericEto<ID> extends AbstractTo implements Gener
 	     * @param eto is the {@link AbstractEto ETO}.
 	     * @param persistentEntity is the persistent {@link GenericEntity entity}.
 	     */
-	    protected <ID> void setPersistentEntity(AbstractGenericEto<ID> eto, GenericEntity<ID> persistentEntity) {
+	    protected <ID extends Serializable> void setPersistentEntity(AbstractComposedKeyEto<ID> eto, GenericEntity<ID> persistentEntity) {
 
 	      assert ((eto.persistentEntity == null) || (persistentEntity == null));
 	      eto.persistentEntity = persistentEntity;

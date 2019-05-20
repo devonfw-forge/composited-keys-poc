@@ -1,16 +1,16 @@
 package com.devonfw.application.pocwithidentificationcounter.general.dataaccess.api;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationGenericEntity;
+import com.devonfw.application.pocwithidentificationcounter.general.common.api.ApplicationComposedKeyEntity;
 import com.devonfw.module.basic.common.api.entity.PersistenceEntity;
 
 @MappedSuperclass
-public abstract class ApplicationGenericPersistenceEntity<ID> implements ApplicationGenericEntity<ID>, PersistenceEntity<ID> {
+public abstract class ApplicationComposedKeyPersistenceEntity<ID extends Serializable> implements ApplicationComposedKeyEntity<ID>, PersistenceEntity<ID> {
 
   private static final long serialVersionUID = 1L;
 
@@ -21,14 +21,13 @@ public abstract class ApplicationGenericPersistenceEntity<ID> implements Applica
   /**
    * The constructor.
    */
-  public ApplicationGenericPersistenceEntity() {
+  public ApplicationComposedKeyPersistenceEntity() {
 
     super();
   }
 
   @Override
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @EmbeddedId
   public ID getId() {
 
     return this.id;

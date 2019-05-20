@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeCto;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeEto;
@@ -41,7 +40,7 @@ public class UcFindEmployeeImpl extends AbstractEmployeeUc implements UcFindEmpl
 	@Override
 	public EmployeeEto findEmployee(CompositeEmployeeKey id) {
 		LOG.debug("Get Employee with id {} from database.", id);
-		Optional<EmployeeEntity> foundEntity = getEmployeeRepository().findById(new CompositeEmployeeKeyImpl(id));
+		Optional<EmployeeEntity> foundEntity = getEmployeeRepository().findById(id);
 		if (foundEntity.isPresent())
 			return getBeanMapper().map(foundEntity.get(), EmployeeEto.class);
 		else
@@ -58,7 +57,7 @@ public class UcFindEmployeeImpl extends AbstractEmployeeUc implements UcFindEmpl
 	public EmployeeCto findEmployeeCto(CompositeEmployeeKey id) {
 		LOG.debug("Get EmployeeCto with id {} from database.", id);
 
-		EmployeeEntity entity = getEmployeeRepository().find(new CompositeEmployeeKeyImpl(id));
+		EmployeeEntity entity = getEmployeeRepository().find(id);
 		EmployeeCto cto = new EmployeeCto();
 		cto.setEmployee(getBeanMapper().map(entity, EmployeeEto.class));
 		cto.setPhones(getBeanMapper().mapList(entity.getPhones(), PhoneEto.class));

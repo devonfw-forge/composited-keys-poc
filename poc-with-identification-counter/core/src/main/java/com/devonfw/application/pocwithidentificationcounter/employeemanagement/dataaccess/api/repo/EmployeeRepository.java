@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.common.api.CompositeEmployeeKey;
-import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.CompositeEmployeeKeyImpl;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.dataaccess.api.EmployeeEntity;
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.logic.api.to.EmployeeSearchCriteriaTo;
 import com.devonfw.module.jpa.dataaccess.api.QueryUtil;
@@ -22,7 +21,7 @@ import com.querydsl.jpa.impl.JPAQuery;
  * {@link DefaultRepository} for {@link EmployeeEntity}
  */
 public interface EmployeeRepository
-extends GenericRepository<EmployeeEntity, CompositeEmployeeKeyImpl>{
+extends GenericRepository<EmployeeEntity, CompositeEmployeeKey>{
 
 	/**
 	 * @param criteria the {@link EmployeeSearchCriteriaTo} with the criteria to
@@ -38,7 +37,7 @@ extends GenericRepository<EmployeeEntity, CompositeEmployeeKeyImpl>{
 
 		CompositeEmployeeKey id = criteria.getId();
 		if (id != null) {
-			query.where($(alias.getId()).eq(new CompositeEmployeeKeyImpl(id)));
+			query.where($(alias.getId()).eq(id));
 		}
 		String name = criteria.getName();
 		if (name != null && !name.isEmpty()) {
