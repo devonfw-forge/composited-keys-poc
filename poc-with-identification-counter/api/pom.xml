@@ -29,6 +29,14 @@
       <groupId>com.devonfw.java.modules</groupId>
       <artifactId>devon4j-security</artifactId>
     </dependency>
+	
+	   <!-- Required for secrutiy REST service -->
+        <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+  </dependency>
+
+
     <!-- Required for secrutiy REST service -->
     <dependency>
       <groupId>javax.servlet</groupId>

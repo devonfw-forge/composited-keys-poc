@@ -33,13 +33,17 @@ public class EmployeeEntity extends ApplicationComposedKeyPersistenceEntity<Comp
 	private static final long serialVersionUID = 1L;
 
 
-	@Override
-	@AttributeOverrides({
-           @AttributeOverride(name="employeeId",
-                column=@Column(name="employeeId",length=10)),
-           @AttributeOverride(name="companyId",
-           		column=@Column(name="companyId",length=10)),
-    })
+	/*
+	 * @Override
+	 * 
+	 * @AttributeOverrides({
+	 * 
+	 * @AttributeOverride(name="employeeId",
+	 * column=@Column(name="employeeId",length=10)),
+	 * 
+	 * @AttributeOverride(name="companyId",
+	 * column=@Column(name="companyId",length=10)), })
+	 */
 	@EmbeddedId
 	public CompositeEmployeeKey getId() {
 		return id;

@@ -22,30 +22,33 @@ public class EmployeemanagementRestServiceImpl implements EmployeemanagementRest
 	@Inject
 	private Employeemanagement employeemanagement;
 
-	@Override
-	public EmployeeEto getEmployee(CompositeEmployeeKey id) {
-		return this.employeemanagement.findEmployee(id);
-	}
+	 @Override
+	  public EmployeeEto getEmployee(String employeeId, String companyId) {
+
+	    return this.employeemanagement.findEmployee(new CompositeEmployeeKey(companyId, employeeId));
+	  }
 
 	@Override
 	public EmployeeEto saveEmployee(EmployeeEto employee) {
 		return this.employeemanagement.saveEmployee(employee);
 	}
 
-	@Override
-	public void deleteEmployee(CompositeEmployeeKey id) {
-		this.employeemanagement.deleteEmployee(id);
-	}
+	  @Override
+	  public void deleteEmployee(String employeeId, String companyId) {
 
+	    this.employeemanagement.deleteEmployee(new CompositeEmployeeKey(companyId, employeeId));
+
+	  }
 	@Override
 	public Page<EmployeeEto> findEmployees(EmployeeSearchCriteriaTo searchCriteriaTo) {
 		return this.employeemanagement.findEmployees(searchCriteriaTo);
 	}
 
-	@Override
-	public EmployeeCto getEmployeeCto(CompositeEmployeeKey id) {
-		return this.employeemanagement.findEmployeeCto(id);
-	}
+	  @Override
+	  public EmployeeCto getEmployeeCto(String employeeId, String companyId) {
+
+	    return this.employeemanagement.findEmployeeCto(new CompositeEmployeeKey(companyId, employeeId));
+	  }
 
 	@Override
 	public Page<EmployeeCto> findEmployeeCtos(EmployeeSearchCriteriaTo searchCriteriaTo) {

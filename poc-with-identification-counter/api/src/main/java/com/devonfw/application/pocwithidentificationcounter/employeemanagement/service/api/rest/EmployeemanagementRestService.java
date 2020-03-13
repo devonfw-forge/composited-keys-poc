@@ -30,9 +30,9 @@ public interface EmployeemanagementRestService {
 	 * @param id the ID of the {@link EmployeeEto}
 	 * @return the {@link EmployeeEto}
 	 */
-	@GET
-	@Path("/employee/{id}/")
-	public EmployeeEto getEmployee(@PathParam("id") CompositeEmployeeKey id);
+	  @GET
+	  @Path("/employee/{employeeId}/company/{companyId}")
+	  public EmployeeEto getEmployee(@PathParam("employeeId") String employeeId, @PathParam("companyId") String companyId);
 
 	/**
 	 * Delegates to {@link Employeemanagement#saveEmployee}.
@@ -50,8 +50,8 @@ public interface EmployeemanagementRestService {
 	 * @param id ID of the {@link EmployeeEto} to be deleted
 	 */
 	@DELETE
-	@Path("/employee/{id}/")
-	public void deleteEmployee(@PathParam("id") CompositeEmployeeKey id);
+	 @Path("/employee/{employeeId}/company/{companyId}")
+	  public void deleteEmployee(@PathParam("employeeId") String employeeId, @PathParam("companyId") String companyId);
 
 	/**
 	 * Delegates to {@link Employeemanagement#findEmployeeEtos}.
@@ -71,8 +71,9 @@ public interface EmployeemanagementRestService {
 	 * @return the {@link EmployeeCto}
 	 */
 	@GET
-	@Path("/employee/cto/{id}/")
-	public EmployeeCto getEmployeeCto(@PathParam("id") CompositeEmployeeKey id);
+	  @Path("/employee/cto/{employeeId}/company/{companyId}")
+	  public EmployeeCto getEmployeeCto(@PathParam("employeeId") String employeeId,
+	      @PathParam("companyId") String companyId);
 
 	/**
 	 * Delegates to {@link Employeemanagement#findEmployeeCtos}.
