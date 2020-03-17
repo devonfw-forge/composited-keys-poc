@@ -210,7 +210,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<!-- API, java.xml.bind module -->
 
 		<dependency>
