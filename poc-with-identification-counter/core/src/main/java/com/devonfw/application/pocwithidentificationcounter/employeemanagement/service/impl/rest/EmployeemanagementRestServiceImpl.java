@@ -13,51 +13,54 @@ import com.devonfw.application.pocwithidentificationcounter.employeemanagement.l
 import com.devonfw.application.pocwithidentificationcounter.employeemanagement.service.api.rest.EmployeemanagementRestService;
 
 /**
- * The service implementation for REST calls in order to execute the logic of
- * component {@link Employeemanagement}.
+ * The service implementation for REST calls in order to execute the logic of component {@link Employeemanagement}.
  */
 @Named("EmployeemanagementRestService")
 public class EmployeemanagementRestServiceImpl implements EmployeemanagementRestService {
 
-	@Inject
-	private Employeemanagement employeemanagement;
+  @Inject
+  private Employeemanagement employeemanagement;
 
-	 @Override
-	  public EmployeeEto getEmployee(String employeeId, String companyId) {
+  @Override
+  public EmployeeEto getEmployee(CompositeEmployeeKey id) {
 
-	    return this.employeemanagement.findEmployee(new CompositeEmployeeKey(companyId, employeeId));
-	  }
+    return this.employeemanagement.findEmployee(id);
+  }
 
-	@Override
-	public EmployeeEto saveEmployee(EmployeeEto employee) {
-		return this.employeemanagement.saveEmployee(employee);
-	}
+  @Override
+  public EmployeeEto saveEmployee(EmployeeEto employee) {
 
-	  @Override
-	  public void deleteEmployee(String employeeId, String companyId) {
+    return this.employeemanagement.saveEmployee(employee);
+  }
 
-	    this.employeemanagement.deleteEmployee(new CompositeEmployeeKey(companyId, employeeId));
+  @Override
+  public void deleteEmployee(CompositeEmployeeKey id) {
 
-	  }
-	@Override
-	public Page<EmployeeEto> findEmployees(EmployeeSearchCriteriaTo searchCriteriaTo) {
-		return this.employeemanagement.findEmployees(searchCriteriaTo);
-	}
+    this.employeemanagement.deleteEmployee(id);
+  }
 
-	  @Override
-	  public EmployeeCto getEmployeeCto(String employeeId, String companyId) {
+  @Override
+  public Page<EmployeeEto> findEmployees(EmployeeSearchCriteriaTo searchCriteriaTo) {
 
-	    return this.employeemanagement.findEmployeeCto(new CompositeEmployeeKey(companyId, employeeId));
-	  }
+    return this.employeemanagement.findEmployees(searchCriteriaTo);
+  }
 
-	@Override
-	public Page<EmployeeCto> findEmployeeCtos(EmployeeSearchCriteriaTo searchCriteriaTo) {
-		return this.employeemanagement.findEmployeeCtos(searchCriteriaTo);
-	}
+  @Override
+  public EmployeeCto getEmployeeCto(CompositeEmployeeKey id) {
 
-	@Override
-	public EmployeeCto saveEmployeePhone(EmployeeCto employee) {
-		return this.employeemanagement.saveEmployeePhone(employee);
-	}
+    return this.employeemanagement.findEmployeeCto(id);
+  }
+
+  @Override
+  public Page<EmployeeCto> findEmployeeCtos(EmployeeSearchCriteriaTo searchCriteriaTo) {
+
+    return this.employeemanagement.findEmployeeCtos(searchCriteriaTo);
+  }
+
+  @Override
+  public EmployeeCto saveEmployeePhone(EmployeeCto employee) {
+
+    return this.employeemanagement.saveEmployeePhone(employee);
+  }
 
 }
