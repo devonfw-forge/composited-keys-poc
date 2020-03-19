@@ -1,7 +1,5 @@
 package com.devonfw.application.pocwithidentificationcounter.general.common.base.test;
 
-import com.devonfw.module.test.common.base.ModuleTest;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -15,9 +13,11 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import com.devonfw.module.test.common.base.ModuleTest;
 
 /**
  * Class for XML Validation Tests.
