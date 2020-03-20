@@ -2,63 +2,77 @@ package com.devonfw.application.pocwithidentificationcounter.employeemanagement.
 
 import java.io.Serializable;
 
-public class CompositeEmployeeKey implements Serializable{
+public class CompositeEmployeeKey implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-	private String companyId;
-	private String employeeId;
+  private static final long serialVersionUID = 1L;
 
+  private String companyId;
 
-	public CompositeEmployeeKey() {
-	}
+  private String employeeId;
 
-	public CompositeEmployeeKey(String mixed) {
-		super();
-		String[] stringVar = mixed.split(",");
-		this.companyId = stringVar[0];
-		this.employeeId = stringVar[1];
-	}
+  public CompositeEmployeeKey() {
 
-	public CompositeEmployeeKey(String companyId, String employeeId) {
-		super();
-		this.companyId = companyId;
-		this.employeeId = employeeId;
-	}
+  }
 
-	public String getCompanyId() {
-		return companyId;
-	}
+  public CompositeEmployeeKey(String mixed) {
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
+    super();
+    String[] stringVar = mixed.split(",");
+    this.companyId = stringVar[0];
+    this.employeeId = stringVar[1];
+  }
 
-	public String getEmployeeId() {
-		return employeeId;
-	}
+  public CompositeEmployeeKey(String companyId, String employeeId) {
 
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
+    super();
+    this.companyId = companyId;
+    this.employeeId = employeeId;
+  }
 
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if ( !(other instanceof CompositeEmployeeKey) ) return false;
+  public String getCompanyId() {
 
-        final CompositeEmployeeKey compositeEmployeeKey = (CompositeEmployeeKey) other;
+    return this.companyId;
+  }
 
-        if ( !compositeEmployeeKey.getCompanyId().equals( getCompanyId() ) ) return false;
-        if ( !compositeEmployeeKey.getEmployeeId().equals( getEmployeeId() ) ) return false;
+  public void setCompanyId(String companyId) {
 
-        return true;
-    }
+    this.companyId = companyId;
+  }
 
-    @Override
-    public int hashCode() {
-         int result;
-         result = getCompanyId().hashCode();
-         result = 29 * result + getEmployeeId().hashCode();
-         return result;
-    }
+  public String getEmployeeId() {
+
+    return this.employeeId;
+  }
+
+  public void setEmployeeId(String employeeId) {
+
+    this.employeeId = employeeId;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+
+    if (this == other)
+      return true;
+    if (!(other instanceof CompositeEmployeeKey))
+      return false;
+
+    final CompositeEmployeeKey compositeEmployeeKey = (CompositeEmployeeKey) other;
+
+    if (!compositeEmployeeKey.getCompanyId().equals(getCompanyId()))
+      return false;
+    if (!compositeEmployeeKey.getEmployeeId().equals(getEmployeeId()))
+      return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+
+    int result;
+    result = getCompanyId().hashCode();
+    result = 29 * result + getEmployeeId().hashCode();
+    return result;
+  }
 }
