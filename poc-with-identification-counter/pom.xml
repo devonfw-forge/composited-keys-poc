@@ -7,25 +7,50 @@
   <version>v1</version>
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Application based on the Open Application Standard Platform for Java (devon4j).</description>
+  <description>Application based on the devon4j.</description>
 
   <properties>
-    <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
-    <devon4j.version>3.0.0</devon4j.version>
+    <spring.boot.version>2.1.9.RELEASE</spring.boot.version>
+    <devon4j.version>3.2.1</devon4j.version>
     <java.version>1.8</java.version>
+    <junit.version>5.5.2</junit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <devonfw.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySystemTest</devonfw.test.excluded.groups>
+    <jackson.version>2.9.9.20190727</jackson.version> <!-- Overriding Jackson for fixing vulnerabilities -->
+    <guava.version>28.1-jre</guava.version>
+    <devonfw.test.excluded.groups>system</devonfw.test.excluded.groups>
   </properties>
 
   <modules>
     <module>api</module>
     <module>core</module>
-            <module>server</module>
+    <module>server</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
+      <!-- overriding jackson version from spring-boot by importing BOM before -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- overriding junit version from spring-boot by importing BOM before -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>      
+      <!-- Library with general utilities -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
       <!-- BOM of spring-boot -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -38,8 +63,7 @@
       <dependency>
         <groupId>com.devonfw.java.boms</groupId>
         <artifactId>devon4j-bom</artifactId>
-        <version>${devon4j.version}
-        </version>
+        <version>${devon4j.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -47,11 +71,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -188,7 +207,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.20.1</version>
+          <version>3.0.0-M3</version>
           <configuration>
             <!-- Surefire changed the default to the project.build.directory causing trouble with file paths to test resources -->
             <workingDirectory>${basedir}</workingDirectory>
@@ -220,7 +239,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-help-plugin</artifactId>
-          <version>2.2</version>
+          <version>3.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -255,12 +274,12 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.0</version>
+          <version>0.8.3</version>
         </plugin>
         <plugin>
           <groupId>org.owasp</groupId>
           <artifactId>dependency-check-maven</artifactId>
-          <version>3.1.1</version>
+          <version>5.1.0</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -281,7 +300,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>2.0.4.RELEASE</version>
+          <version>${spring.boot.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -291,25 +310,25 @@
     <profile>
       <id>moduletest</id>
       <properties>
-        <devonfw.test.excluded.groups>com.devonfw.module.test.common.api.category.CategoryComponentTest,com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devonfw.test.excluded.groups>
+      <devonfw.test.excluded.groups>component,subsystem,system</devonfw.test.excluded.groups>
       </properties>
     </profile>
     <profile>
       <id>componenttest</id>
       <properties>
-        <devonfw.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySubsystemTest,com.devonfw.module.test.common.api.category.CategorySystemTest</devonfw.test.excluded.groups>
+        <devonfw.test.excluded.groups>subsystem,system</devonfw.test.excluded.groups>
       </properties>
     </profile>
     <profile>
       <id>subsystemtest</id>
-      <properties>
-        <devonfw.test.excluded.groups>com.devonfw.module.test.common.api.category.CategorySystemTest</devonfw.test.excluded.groups>
+       <properties>
+        <devonfw.test.excluded.groups>system</devonfw.test.excluded.groups>
       </properties>
     </profile>
     <profile>
       <id>systemtest</id>
       <properties>
-        <devonfw.test.excluded.groups></devonfw.test.excluded.groups>
+        <devonfw.test.excluded.groups>none</devonfw.test.excluded.groups>
       </properties>
     </profile>
     <profile>
@@ -430,6 +449,9 @@
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
+        <configuration>
+          <failOnError>false</failOnError>
+        </configuration>
         <reportSets>
           <reportSet>
             <reports>

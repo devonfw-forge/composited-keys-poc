@@ -1,7 +1,5 @@
 package com.devonfw.application.pocwithidentificationcounter.general.common.base;
 
-import com.devonfw.module.test.common.base.ModuleTest;
-
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -14,7 +12,9 @@ import net.sf.mmm.util.reflect.api.ReflectionUtil;
 import net.sf.mmm.util.reflect.base.ReflectionUtilImpl;
 
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import com.devonfw.module.test.common.base.ModuleTest;
 
 /**
  * Tests the permission check in logic layer.

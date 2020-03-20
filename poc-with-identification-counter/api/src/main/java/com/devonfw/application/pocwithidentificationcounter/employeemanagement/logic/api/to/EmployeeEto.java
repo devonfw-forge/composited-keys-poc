@@ -9,88 +9,83 @@ import com.devonfw.application.pocwithidentificationcounter.general.common.api.t
  */
 public class EmployeeEto extends AbstractComposedKeyEto<CompositeEmployeeKey> implements Employee {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private CompositeEmployeeKey id;
+  private String name;
 
-	private String name;
+  private String lastName;
 
-	private String lastName;
+  @Override
+  public String getName() {
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    return this.name;
+  }
 
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+  @Override
+  public void setName(String name) {
 
-	@Override
-	public String getLastName() {
-		return lastName;
-	}
+    this.name = name;
+  }
 
-	@Override
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+  @Override
+  public String getLastName() {
 
-	public CompositeEmployeeKey getId() {
-		return id;
-	}
+    return this.lastName;
+  }
 
-	public void setId(CompositeEmployeeKey id) {
-		this.id = id;
-	}
+  @Override
+  public void setLastName(String lastName) {
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-		result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-		result = prime * result + ((this.lastName == null) ? 0 : this.lastName.hashCode());
-		return result;
-	}
+    this.lastName = lastName;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
+  @Override
+  public int hashCode() {
 
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		// class check will be done by super type EntityTo!
-		if (!super.equals(obj)) {
-			return false;
-		}
-		EmployeeEto other = (EmployeeEto) obj;
-		if (this.id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!this.id.equals(other.id)) {
-			return false;
-		}
-		if (this.name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!this.name.equals(other.name)) {
-			return false;
-		}
-		if (this.lastName == null) {
-			if (other.lastName != null) {
-				return false;
-			}
-		} else if (!this.lastName.equals(other.lastName)) {
-			return false;
-		}
-		return true;
-	}
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+    result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+    result = prime * result + ((this.lastName == null) ? 0 : this.lastName.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    // class check will be done by super type EntityTo!
+    if (!super.equals(obj)) {
+      return false;
+    }
+    EmployeeEto other = (EmployeeEto) obj;
+    if (getId() == null) {
+      if (other.getId() != null) {
+        return false;
+      }
+    } else if (!getId().equals(other.getId())) {
+      return false;
+    }
+    if (this.name == null) {
+      if (other.name != null) {
+        return false;
+      }
+    } else if (!this.name.equals(other.name)) {
+      return false;
+    }
+    if (this.lastName == null) {
+      if (other.lastName != null) {
+        return false;
+      }
+    } else if (!this.lastName.equals(other.lastName)) {
+      return false;
+    }
+    return true;
+  }
 
 }
